@@ -23,9 +23,8 @@ To deploy prod
 
 This will ready service on your host, for example if you localhost then will be  http://localhost:<your_port>/api/docs
 
-See demo for my project
+See [demo](https://noi-food-delivery.herokuapp.com/api/docs) for my project
 
 ### TODO
-- Update demo site online
 - Need to extract data 'menu' in restaurant to new document to be improve seach efficiance 
 - Some code need be improve to be ES6
