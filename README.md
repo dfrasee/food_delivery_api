@@ -10,6 +10,8 @@ This project used MongoDB so you can setup your data base and import raw data wi
 
 Change .env.sameple file to .env then edit value.
 
+Change api doc for your host and schemes in /docs/swagger.json
+
 Ensure you have install Node.js on your server [see more](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install Node.js
 
 Now setup project
