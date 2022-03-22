@@ -21,13 +21,13 @@
                 "summary" : "Get all opening restaurants",
                 "description": "Get all opening restaurants by sepecific date-time, default by current date-time.",
                 "produces": ["application/json"],
-                "parameters": {
+                "parameters": [{
                     "name":"strDatetime",
                     "in":"formData",
                     "description":"Date-time to check opening format yyyy-mm-dd H:i eg. 2022-03-21 14:00:00",
                     "required":false,
                     "type":"string"
-                },
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation",
