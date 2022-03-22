@@ -26,5 +26,6 @@ This will ready service on your host, for example if you localhost then will be 
 See [demo](https://noi-food-delivery.herokuapp.com/api/docs) for my project
 
 ### TODO
-- Need to extract data 'menu' in restaurant to new document to be improve seach efficiance 
+- Need to extract data 'menu' in restaurant to new document to be improve seach efficiance.
+- Improve solution of fetch data from DB for loading efficiancy.
 - Some code need be improve to be ES6
