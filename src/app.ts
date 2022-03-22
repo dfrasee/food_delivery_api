@@ -13,9 +13,9 @@ class App {
     public mongoUrl: string = process.env.DB_CONN_STRING;
     
     /* Swagger files start */
-    private swaggerFile: any = (process.cwd()+"/src/docs/swagger.json");
+    private swaggerFile: any = (process.cwd()+"/docs/swagger.json");
     private swaggerData: any = fs.readFileSync(this.swaggerFile, 'utf8');
-    private customCss: any = fs.readFileSync((process.cwd()+"/src/docs/swagger.css"), 'utf8');
+    private customCss: any = fs.readFileSync((process.cwd()+"/docs/swagger.css"), 'utf8');
     private swaggerDocument = JSON.parse(this.swaggerData);
     /* Swagger files end */
 
