@@ -37,11 +37,63 @@ export class ApiController {
         let dishCount = req.body.dishCount;
         let fromPrice = parseFloat(req.body.fromPrice);
         let toPrice = parseFloat(req.body.toPrice);
+      
+        // const restaurants =  RestaurantModel.aggregate()
+        //     .match({ "menu.price": { $gte: fromPrice, $lte: toPrice} })
+        //     //.unwind('menu')
+        //     .sortByCount('menu')
+        //         // [
+        //         //     { $match: { "menu.price": { $gte: fromPrice, $lte: toPrice} } },
+        //         //     // { $unwind: "menu.price" }, { $sortByCount: "menu.price" },
+        //         //     // { $count: "dishCount" },
+                   
+        //         // ]
+        //     .limit(limit).exec();
+            
+        //     restaurants.then(
+        //         function(restaurant) {
+        //             console.log('hi',restaurant);
+        //             if(restaurant){
+        //             res.json(restaurant); 
+        //             }
+        //         }
+        //     );
+        //     res.json({}); 
+            /*
+            .then(
+                function(restaurant) {
+                    console.log('hi');
+                    res.json((restaurant)); 
+                }, 
+                function(err) {
+                    console.log('hoo');
+                    res.json({}); 
+                }
+            );*/
 
-         const restaurants = RestaurantRepo.getTopRestaurantsByOptions(limit,dishCount,fromPrice,toPrice);
-         restaurants.then(function(restaurant) {
-                 res.json((restaurant)); 
-         });
+            const restaurants =  RestaurantModel.aggregate([
+                {$match: { 'menu.price': { $gte: fromPrice, $lte: toPrice} }},
+                {$unwind: '$menu'},
+                {$project: {_id: 0,"restaurantName":1, "cashBalance": 1, 'openingHours': 1,}},
+                {$sort: { 'StudentDetails.StudentScore': 1 }},
+                {$limit: 5}
+                ])
+                .exec();
+            
+            restaurants.then(
+                function(restaurant) {
+                    console.log('hi',restaurant);
+                    if(restaurant){
+                    res.json(restaurant); 
+                    }
+                }
+            );
+            res.json({}); 
+
+        //  const restaurants = RestaurantRepo.getTopRestaurantsByOptions(limit,dishCount,fromPrice,toPrice);
+        //  restaurants.then(function(restaurant) {
+        //          res.json((restaurant)); 
+        //  });
 
         
     }

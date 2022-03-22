@@ -2,16 +2,15 @@ import * as express from "express";
 import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
 import { ApiRoutes } from "./routes/api";
-// import { DocsRoutes } from "./routes/docs";
 import * as swaggerUi from "swagger-ui-express";
 import fs = require('fs');
-
+import * as dotenv from 'dotenv';
+dotenv.config();
 class App {
 
     public app: express.Application;
     public apiRoute: ApiRoutes = new ApiRoutes();
-    // public docRoute: DocsRoutes = new DocsRoutes();
-    public mongoUrl: string = 'mongodb://noinoi_dev:bfKouLI1AWUexLqK@cluster0-shard-00-02.pnovo.mongodb.net:27017/test?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=true';//process.env.DB_CONN_STRING;
+    public mongoUrl: string = process.env.DB_CONN_STRING;
     
     /* Swagger files start */
     private swaggerFile: any = (process.cwd()+"/src/docs/swagger.json");

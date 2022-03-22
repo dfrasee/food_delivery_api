@@ -1,6 +1,9 @@
 import app from "./app";
-const port = '8088';//process.env.PORT;
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+const port = process.env.PORT;
 
 app.listen(port, () => {
-    console.log('API server listening on port ' + port);
+    console.log('API server listening on port ' , process.env.PORT);
 })

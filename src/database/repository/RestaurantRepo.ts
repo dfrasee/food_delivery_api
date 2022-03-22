@@ -17,6 +17,11 @@ export class RestaurantRepo {
             .exec();           
   }
 
+  public static getTopRestaurantsByOptions2(limit: number, dishCount: number, beginPrice: number, endPrice: number): Promise<IRestaurant | null> {
+    // const test = await RestaurantModel.aggregate( [ { $unwind: "$tags" },  { $sortByCount: "$tags" } ] );
+    return null;
+  }
+
   public static searchByName(searchString: string): Promise<IRestaurant|null> {
 
       return RestaurantModel.find( { $text: { $search : searchString } },{ score : { $meta: "textScore" } } )
