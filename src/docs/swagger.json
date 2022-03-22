@@ -1,0 +1,239 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple test NodeJS API project to Swagger Documentation",
+        "version": "1.0.0",
+        "title": "Test API",
+        "contact": {
+            "email": "rasee59@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http"],
+    "host": "localhost:8088",
+    "basePath": "/api",
+    "paths" : {
+        "/get_opening_restaurants" : {
+            "post" : {
+                "summary" : "Get all opening restaurants",
+                "description": "Get all opening restaurants by sepecific date-time, default by current date-time.",
+                "produces": ["application/json"],
+                "parameters": {
+                    "name":"strDatetime",
+                    "in":"formData",
+                    "description":"Date-time to check opening format yyyy-mm-dd H:i eg. 2022-03-21 14:00:00",
+                    "required":false,
+                    "type":"string"
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/openRestaurantsResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/get_top_restaurants" : {
+            "post" : {
+                "summary" : "Search for top restaurants or dishes by options",
+                "description": "List top y restaurants that have more or less than x number of dishes within a price range",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name":"limit",
+                        "in":"formData",
+                        "description":"Top y restaurants",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"dishCount",
+                        "in":"formData",
+                        "description":"Amount of dishes",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"fromPrice",
+                        "in":"formData",
+                        "description":"Dish price's range from",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"toPrice",
+                        "in":"formData",
+                        "description":"Dish price's range from",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/restaurantsResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/search" : {
+            "post" : {
+                "summary" : "Search for restaurants or dishes by name",
+                "description": "Search for restaurants or dishes by name, ranked by relevance to search term",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name":"searchTerm",
+                        "in":"formData",
+                        "description":"Restaurant's name or dish's name",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/restaurantsResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/purchase" : {
+            "post" : {
+                "summary" : "Process a user purchasing a dish from a restaurant",
+                "description": "Process a user purchasing a dish from a restaurant, handling all relevant data changes in an atomic transaction.",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name":"userId",
+                        "in":"formData",
+                        "description":"User's id",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"restaurantName",
+                        "in":"formData",
+                        "description":"Restaurant's name",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"dishName",
+                        "in":"formData",
+                        "description":"Dish's name",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"price",
+                        "in":"formData",
+                        "description":"Dish's price",
+                        "required":true,
+                        "type":"string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                        
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "openRestaurantsResponse": {
+            "type": "array",
+            "properties": {
+                "restaurantName": {
+                    "type": "string"
+                },
+                "openingHours": {
+                    "type": "string"
+                }
+                
+            }
+        },
+        "restaurantsResponse": {
+            "type": "array",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "restaurantName": {
+                    "type": "string"
+                },
+                "openingHours": {
+                    "type": "string"
+                },
+                "menu":{
+                    "_id": {
+                        "type": "string"
+                    },
+                    "dishName": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+
+        }
+    }
+}
