@@ -1,5 +1,5 @@
 # Food Delivery API
-#### This project is practice my coding with typescript
+#### This project is to practice my coding with typescript
 
 ### Installation
 > $git clone https://github.com/dfrasee/food_delivery_api.git
@@ -24,3 +24,7 @@ To deploy prod
 This will ready service on your host, for example if you localhost then will be  http://localhost:<your_port>/apidocs
 
 See demo for my project
+
+### TODO
+- Need to extract data 'menu' in restaurant to new document to be improve seach efficiance 
+- Some code need be improve to be ES6
