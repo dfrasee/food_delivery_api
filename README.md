@@ -15,8 +15,11 @@ Ensure you have install Node.js on your server [see more](https://docs.npmjs.com
 Now setup project
 > $npm install 
 
-Now start server
+To test dev 
 > $ts-node ./src/server.ts
+> 
+To deploy prod 
+> $npm run build && npm run start
 
 This will ready service on your host, for example if you localhost then will be  http://localhost:<your_port>/apidocs
 
